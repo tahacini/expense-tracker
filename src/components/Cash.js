@@ -12,7 +12,7 @@ function Cash() {
         <div>
           {cash.cash >= 0 ? "+" : "-"}
           {cash.currency}
-          {cash.cash < 0 ? cash.cash.slice(1) : cash.cash}
+          {cash.cash < 0 ? cash.cash.toString().slice(1) : cash.cash}
         </div>
         <div onClick={() => setOpen(true)}>Edit Balance</div>
         <CashEdit open={open} setOpen={setOpen} />

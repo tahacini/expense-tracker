@@ -1,11 +1,12 @@
-function Transactions({ category, date, expense, id }) {
+function Expenses({ category, date, expense, currency, id }) {
   return (
     <div className="flex">
       <div>{category}</div>
       <div>
         <div>
           {expense >= 0 ? "+" : "-"}
-          {expense}
+          {currency}
+          {expense < 0 ? expense.slice(1) : expense}
         </div>
         <div>{date}</div>
       </div>
@@ -13,4 +14,4 @@ function Transactions({ category, date, expense, id }) {
   );
 }
 
-export default Transactions;
+export default Expenses;

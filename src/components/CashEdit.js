@@ -6,17 +6,17 @@ function CashEdit({ open, setOpen }) {
   const [cash, setCash] = useState("");
   const dispatch = useDispatch();
 
-  const onClose = () => {
-    setOpen(false);
-    setCash("");
-  };
-
   const onChange = (e) => {
     if (/^0\d/.test(e.target.value.toString())) {
       return;
     }
-
     setCash(e.target.value);
+  };
+
+  const onClose = () => {
+    window.removeEventListener("click", onClickOutSide);
+    setOpen(false);
+    setCash("");
   };
 
   const onClick = () => {
@@ -24,9 +24,9 @@ function CashEdit({ open, setOpen }) {
       return;
     }
 
+    onClose();
     dispatch(cashEdited(cash));
     setCash("");
-    onClose();
   };
 
   // Close results when clicked outside
@@ -39,15 +39,14 @@ function CashEdit({ open, setOpen }) {
     return () => {
       window.removeEventListener("click", onClickOutSide);
     };
+  }, [open, onClick]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    function onClickOutSide(e) {
-      if (document.getElementById("balance").contains(e.target)) {
-        return;
-      }
-
-      onClose();
+  function onClickOutSide(e) {
+    if (document.getElementById("balance").contains(e.target)) {
+      return;
     }
-  }, [open]);
+    onClose();
+  }
 
   if (!open) return null;
 

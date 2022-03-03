@@ -3,7 +3,7 @@ import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch } from "react-redux";
 import { categoryAdded } from "../features/categorySlice";
 
-function AddCategory() {
+function AddCategory({ onCloseTransaction }) {
   const [category, setCategory] = useState("");
 
   const dispatch = useDispatch();
@@ -23,6 +23,7 @@ function AddCategory() {
     );
 
     setCategory("");
+    onCloseTransaction();
   };
 
   return (

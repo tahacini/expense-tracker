@@ -1,5 +1,5 @@
 import { useSelector } from "react-redux";
-import Transactions from "./Transactions";
+import Expenses from "./Expenses";
 
 function Table() {
   const expenses = useSelector((state) => state.expenses);
@@ -7,12 +7,13 @@ function Table() {
   return (
     <div>
       {expenses.map((item) => (
-        <Transactions
+        <Expenses
           key={item.id}
           id={item.id}
           expense={item.expense}
           date={item.date}
           category={item.category}
+          currency={item.currency}
         />
       ))}
     </div>

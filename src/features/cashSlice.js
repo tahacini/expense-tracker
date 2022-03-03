@@ -11,7 +11,7 @@ const cashSlice = createSlice({
   initialState,
   reducers: {
     cashAdded(state, action) {
-      return [...state, action.payload];
+      state.cash = +state.cash + +action.payload;
     },
     cashEdited(state, action) {
       state.cash = action.payload;

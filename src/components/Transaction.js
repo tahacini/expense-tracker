@@ -8,7 +8,7 @@ function Transaction() {
 
   return (
     <>
-      <div>
+      <div onClick={() => setOpen(true)}>
         New Transaction <i className="fa-solid fa-circle-plus"></i>
       </div>
       <NewTransaction open={open} setOpen={setOpen} />
