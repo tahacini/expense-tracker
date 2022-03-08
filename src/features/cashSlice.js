@@ -2,7 +2,7 @@ import { createSlice } from "@reduxjs/toolkit";
 
 const initialState = {
   id: "cash",
-  cash: 1000,
+  cash: 5000,
   currency: "₺",
 };
 

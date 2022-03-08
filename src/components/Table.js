@@ -4,6 +4,8 @@ import Expenses from "./Expenses";
 function Table() {
   const expenses = useSelector((state) => state.expenses);
 
+  // if (!expenses.length) return null;
+
   return (
     <div>
       {expenses.map((item) => (

@@ -3,16 +3,37 @@ import { createSlice } from "@reduxjs/toolkit";
 const initialState = [
   {
     id: 1,
-    expense: 300,
-    category: "Work",
+    expense: 10000,
+    category: "Salary",
     date: "2022-03-01",
     currency: "₺",
   },
   {
     id: 2,
-    expense: 400,
-    category: "Work",
-    date: "2022-03-01",
+    expense: -2000,
+    category: "Housing",
+    date: "2022-03-02",
+    currency: "₺",
+  },
+  {
+    id: 3,
+    expense: -2000,
+    category: "Food and Beverage",
+    date: "2022-03-02",
+    currency: "₺",
+  },
+  {
+    id: 4,
+    expense: -500,
+    category: "Food and Beverage",
+    date: "2022-03-03",
+    currency: "₺",
+  },
+  {
+    id: 5,
+    expense: -500,
+    category: "Fuel",
+    date: "2022-03-03",
     currency: "₺",
   },
 ];

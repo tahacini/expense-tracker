@@ -1,11 +1,11 @@
 import { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
-import { useDispatch } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import { categoryAdded } from "../features/categorySlice";
 
 function AddCategory({ onCloseTransaction }) {
   const [category, setCategory] = useState("");
-
+  const categ = useSelector((state) => state.categories);
   const dispatch = useDispatch();
 
   const onSubmit = (e) => {
@@ -15,10 +15,25 @@ function AddCategory({ onCloseTransaction }) {
       return;
     }
 
+    let formated = category
+      .trim()
+      .toLowerCase()
+      .replace(/(^\w{1})|(\s+\w{1})/g, (letter) => letter.toUpperCase());
+
+    for (let i = 0; i < categ.length; i++) {
+      if (categ[i].category === formated) {
+        alert("Category Already Exist");
+        return;
+      }
+    }
+
+    let randomColor = Math.floor(Math.random() * 16777215).toString(16);
+
     dispatch(
       categoryAdded({
         id: nanoid(),
-        category,
+        category: formated,
+        color: "#" + randomColor,
       })
     );
 
