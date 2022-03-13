@@ -1,9 +1,7 @@
-import { useSelector } from "react-redux";
 import { useState } from "react";
 import NewTransaction from "./NewTransaction";
 
 function Transaction() {
-  const cash = useSelector((state) => state.cash);
   const [open, setOpen] = useState(false);
 
   return (
