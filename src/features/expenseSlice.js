@@ -46,9 +46,16 @@ const initialState = [
   },
   {
     id: 7,
-    expense: -2000,
-    category: "Housing",
-    date: "2022-02-03",
+    expense: -250,
+    category: "Repairments",
+    date: "2022-03-10",
+    currency: "₺",
+  },
+  {
+    id: 8,
+    expense: -175,
+    category: "Entertainment",
+    date: "2022-03-12",
     currency: "₺",
   },
 ];
