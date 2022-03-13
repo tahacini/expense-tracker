@@ -7,9 +7,17 @@ import { nanoid } from "@reduxjs/toolkit";
 function AddTransaction({ onCloseTransaction }) {
   const categories = useSelector((state) => state.categories);
   const [expense, setExpense] = useState("");
+  const [isExpense, setIsExpense] = useState(true);
   const [category, setCategory] = useState("");
   const today = new Date().toJSON().slice(0, 10);
   const dispatch = useDispatch();
+
+  const onStyle = {
+    backgroundColor: "var(--clr-primary-blackish)",
+  };
+  const offStyle = {
+    backgroundColor: "var(--clr-side-black",
+  };
 
   const onSubmit = (e) => {
     e.preventDefault();
@@ -18,46 +26,69 @@ function AddTransaction({ onCloseTransaction }) {
       return;
     }
 
+    let formatedExpense = isExpense ? "-" + expense : expense;
+
     dispatch(
       expenseAdded({
         id: nanoid(),
-        expense,
-        category,
+        expense: formatedExpense,
+        category: category ? category : "Other",
         date: today,
         currency: "₺",
       })
     );
 
-    dispatch(cashAdded(expense));
+    dispatch(cashAdded(formatedExpense));
     setCategory("");
     setExpense("");
+    setIsExpense(true);
     onCloseTransaction();
   };
 
   const onChange = (e) => {
-    if (/^0\d/.test(e.target.value.toString())) {
+    if (/^0\d/.test(e.target.value) || e.target.value.length >= 11) {
       return;
     }
-    setExpense(e.target.value);
+    if (/^\d+$|^$/g.test(e.target.value)) {
+      setExpense(e.target.value);
+    }
   };
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>Write your Transaction</label>
+      <form>
+        <div className="flex btn-container margin-bottom">
+          <div
+            style={isExpense ? onStyle : offStyle}
+            className="btn"
+            onClick={() => setIsExpense(true)}
+          >
+            Expense
+          </div>
+          <div
+            style={!isExpense ? onStyle : offStyle}
+            className="btn"
+            onClick={() => setIsExpense(false)}
+          >
+            Income
+          </div>
+        </div>
+        <div className="margin-bottom">
+          <label className="fs-200">Write your Transaction</label>
           <input
-            type="number"
+            type="text"
             value={expense}
             onChange={onChange}
+            className="input-text"
             placeholder="New Transaction"
           />
         </div>
-        <div>
-          <label>Select Category</label>
+        <div className="margin-bottom flex column">
+          <label className="fs-200">Select Category</label>
           <select
             value={category}
             onChange={(e) => setCategory(e.target.value)}
+            className="input-text"
           >
             <option value={""}></option>
             {categories.map((el) => (
@@ -68,7 +99,9 @@ function AddTransaction({ onCloseTransaction }) {
           </select>
         </div>
         <div>
-          <button type="submit">Add</button>
+          <div className="btn" onClick={onSubmit}>
+            Add
+          </div>
         </div>
       </form>
     </div>

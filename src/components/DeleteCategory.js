@@ -24,7 +24,7 @@ function DeleteCategory() {
   };
 
   return (
-    <div>
+    <div className="category-container grid">
       {categories.map((el) => (
         <div key={el.id}>
           {el.category}{" "}

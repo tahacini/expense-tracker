@@ -1,9 +1,9 @@
 :root {
   --lh-10: 1.3;
   --mb-10: 1em;
-  --fs-50: 0.85rem; /*13.6px*/
+  --fs-50: 1rem; /*13.6px*/
   --fs-100: 1rem; /*16px*/
-  --fs-150: 1.15rem; /*18.4px*/
+  --fs-150: 1.05rem; /*18.4px*/
   --fs-200: 1.25rem; /*20px*/
   --fs-300: 1.5rem; /*24px*/
   --fs-400: 1.75rem; /*28px*/
@@ -13,25 +13,23 @@
   --fs-700: 3rem; /*48px*/
   --fs-800: 4rem; /*64px*/
   --fs-900: 8rem; /*128px*/
-  --ff-main: arial, garamond, verdana, sans-serif, serif;
+  --ff-main: "Oswald", sans-serif;
   --clr-side-white: #fff;
   --clr-side-black: #222;
-  --clr-primary-white: #fdfdfd;
-  --clr-primary-black: #080b1b;
-  --clr-primary-orange: #ff8b68;
-  --clr-primary-redish: #ff501c;
-  --clr-primary-darkblue: #1a2456;
-  --clr-primary-pink: #efc2b3;
+  --clr-main-card: hsl(0, 0%, 100%);
+  --clr-primary-white: hsl(0, 0%, 96%);
+  --clr-primary-blackish: #4d4747;
+  --clr-primary-blue: rgb(62, 143, 235);
 }
 
 @media (max-width: 40em) {
   :root {
     --lh-10: 1.2;
     --mb-10: 0.75em;
-    --fs-50: 0.85rem; /*13.6px*/
+    --fs-50: 0.88rem; /*13.6px*/
     --fs-100: 1rem; /*16px*/
-    --fs-150: 1.15rem; /*18.4px*/
-    --fs-200: 1.2rem; /*19.2px*/
+    --fs-150: 1.035rem; /*18.4px*/
+    --fs-200: 1.25rem; /*19.2px*/
     --fs-300: 1.25rem; /*20px*/
     --fs-400: 1.5rem; /*24px*/
     --fs-500: 1.75rem; /*28px*/
@@ -55,11 +53,6 @@ html {
   scroll-behavior: smooth;
 }
 
-nav {
-  width: 100%;
-  z-index: 1000;
-}
-
 body {
   font-family: var(--ff-main);
   color: var(--clr-side-black);
@@ -77,6 +70,11 @@ img {
 
 .flex {
   display: flex;
+}
+
+.flex-center {
+  align-items: center;
+  justify-content: center;
 }
 
 .flex-wrap {
@@ -107,25 +105,26 @@ img {
   position: absolute;
 }
 
-.text-hollow {
-  color: inherit;
-  text-shadow: 1px 1px black, -1px 1px black, 1px -1px black, -1px -1px black;
-}
-
 .btn {
   padding: 0.5em 1em;
   cursor: pointer;
   background-color: var(--clr-side-black);
   color: var(--clr-side-white);
+  flex-basis: 100%;
+  text-align: center;
+}
+
+.btn:hover {
+  background-color: var(--clr-primary-blackish) !important;
+}
+
+.btn-container {
+  gap: 0.85rem;
 }
 
 /*============= 
     Typography 
 ===============*/
-
-input[type="checkbox"] {
-  display: none;
-}
 
 ul,
 li,
@@ -184,25 +183,76 @@ p {
 } /*128px*/
 
 /*============= 
-    Navbar 
-===============*/
-
-.logo {
-  width: 4rem;
-}
-
-/*============= 
     Body
 ===============*/
 
-.section-container {
-  margin: 0 auto;
-  width: min(90%, 75rem);
-  padding: 2.5rem 0;
+.wrapper {
+  margin: 2rem auto;
+  width: min(90%, 47.5rem);
+  background-color: var(--clr-main-card);
+  padding: 4rem 3rem;
+  padding-right: calc(3rem - 14px);
+  border-radius: 15px;
+  box-shadow: rgba(0, 0, 0, 0.35) 0px 4px 10px;
 }
 
 .section-margin {
-  margin-bottom: 5rem;
+  margin-bottom: 3rem;
+}
+
+.manage {
+  justify-content: center;
+  align-content: center;
+  gap: 1.5rem;
+  background-color: var(--clr-primary-blackish);
+  color: var(--clr-side-white);
+  padding: 1.2rem;
+  border-radius: 13px 13px 4px 4px;
+  margin-right: 14px;
+}
+
+.manage > div {
+  background-color: var(--clr-primary-blue);
+  min-width: 14.125rem;
+  min-height: 3.25rem;
+  border-radius: 5px;
+}
+
+.balance {
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  justify-content: center;
+}
+
+.cash {
+  background-color: #eeeeee;
+  width: 6.5rem;
+  padding: 0.25rem 0.25rem;
+  align-items: center;
+}
+
+.edit-balance {
+  align-items: center;
+}
+
+.new-transaction {
+  padding: 0.5rem;
+  display: grid;
+  place-items: center;
+}
+
+.table {
+  gap: 0.75rem;
+  max-height: 23.15rem;
+}
+
+.table-expenses {
+  background-color: var(--clr-primary-blackish);
+  color: var(--clr-side-white);
+  border-radius: 4px;
+  padding: 0.65rem;
+  grid-template-columns: 20fr 6fr 1fr;
+  align-items: center;
 }
 
 .modal-background {
@@ -220,9 +270,15 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--clr-primary-blue);
   z-index: 1000;
-  padding: 5rem;
+  padding: 4rem 4rem;
+  border-radius: 8px;
+  flex-direction: column;
+}
+
+.margin-bottom {
+  margin-bottom: 1rem;
 }
 
 .transaction-container {
@@ -230,9 +286,54 @@ p {
   top: 50%;
   left: 50%;
   transform: translate(-50%, -50%);
-  background-color: #fff;
+  background-color: var(--clr-primary-blue);
   z-index: 1000;
-  padding: 1rem;
+  padding: 2rem 1rem;
+  border-radius: 8px;
+  min-height: 20rem;
+}
+
+.input-text {
+  padding: 0.45rem;
+  width: 100%;
+  margin-top: 0.15rem;
+}
+
+.input-text:focus {
+  outline: none;
+}
+
+.select-container {
+  gap: 0.35rem;
+  text-align: center;
+}
+
+.btn-transaction {
+  padding: 0.5em 0.75em;
+  cursor: pointer;
+  background-color: var(--clr-side-black);
+  color: var(--clr-side-white);
+  flex-basis: 100%;
+  display: grid;
+  place-items: center;
+}
+
+.btn-transaction:hover {
+  background-color: var(--clr-primary-blackish) !important;
+}
+
+.category-container {
+  gap: 0.5rem;
+  overflow-y: auto;
+  max-height: 12.5rem;
+}
+
+.category-container > div {
+  padding: 0.75rem;
+  background-color: var(--clr-primary-blackish);
+  display: grid;
+  grid-template-columns: 10fr 1fr;
+  border-radius: 4px;
 }
 
 /*============= 
@@ -241,15 +342,21 @@ p {
 
 .footer-container {
   margin: 0 auto;
-  width: min(90%, 100rem);
+  width: 100%;
+  padding: 0.75rem 0;
+  justify-content: center;
+  align-items: center;
+  background-color: rgb(195, 195, 195);
 }
 
-.footer-flex {
-  flex-wrap: wrap;
+.logo-small {
+  width: 2.5rem;
 }
 
-.footer-flex > * {
-  flex: 1 1 12.5rem;
+.footer-text {
+  display: flex;
+  align-items: center;
+  gap: 0.25rem;
 }
 
 /*============= 
@@ -260,10 +367,47 @@ p {
   .none {
     display: none;
   }
+
+  .transaction-container {
+    padding: 2rem;
+    min-height: 24.25rem;
+  }
+
+  .category-container {
+    gap: 0.5rem;
+    overflow-y: auto;
+    max-height: 16rem;
+  }
 }
 
 @media (max-width: 40em) {
   .none-mobil {
     display: none;
+  }
+
+  .manage {
+    flex-direction: column;
+  }
+
+  .manage > div {
+    min-width: 14rem;
+    max-width: 17rem;
+    margin: 0 auto;
+  }
+
+  .wrapper {
+    margin: 1rem auto;
+    width: min(100%, 26rem);
+    padding: 2rem 1rem;
+    padding-right: calc(1rem - 14px);
+  }
+
+  .table-expenses {
+    padding: 0.65rem;
+    grid-template-columns: 20fr 11fr 1fr;
+  }
+
+  .table {
+    margin-right: 14px;
   }
 }

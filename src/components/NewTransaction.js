@@ -1,4 +1,3 @@
-import { useDispatch } from "react-redux";
 import { useState, useEffect } from "react";
 import AddCategory from "./AddCategory";
 import AddTransaction from "./AddTransaction";
@@ -6,6 +5,13 @@ import DeleteCategory from "./DeleteCategory";
 
 function NewTransaction({ open, setOpen }) {
   const [active, setActive] = useState("Transaction");
+
+  const onStyle = {
+    backgroundColor: "var(--clr-primary-blackish)",
+  };
+  const offStyle = {
+    backgroundColor: "var(--clr-side-black",
+  };
 
   const onCloseTransaction = () => {
     setActive("Transaction");
@@ -34,7 +40,7 @@ function NewTransaction({ open, setOpen }) {
 
       onCloseTransaction();
     }
-  }, [open]);
+  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
 
   // Render Active Switch
 
@@ -55,14 +61,31 @@ function NewTransaction({ open, setOpen }) {
     <>
       <div className="modal-background"></div>
       <div id="transaction" className="transaction-container">
-        <div className="flex">
-          <div onClick={() => changeActive("Transaction")}>Add Transaction</div>
-          <div onClick={() => changeActive("Category")}>Add Category</div>
-          <div onClick={() => changeActive("DeleteCateg")}>Delete Category</div>
+        <div className="flex select-container fs-100 margin-bottom">
+          <div
+            style={active === "Transaction" ? onStyle : offStyle}
+            className="btn-transaction"
+            onClick={() => changeActive("Transaction")}
+          >
+            Add Transaction
+          </div>
+          <div
+            style={active === "Category" ? onStyle : offStyle}
+            className="btn-transaction"
+            onClick={() => changeActive("Category")}
+          >
+            Add Category
+          </div>
+          <div
+            style={active === "DeleteCateg" ? onStyle : offStyle}
+            className="btn-transaction"
+            onClick={() => changeActive("DeleteCateg")}
+          >
+            Delete Category
+          </div>
         </div>
         <div>{renderSwitch(active)}</div>
       </div>
-      ;
     </>
   );
 }

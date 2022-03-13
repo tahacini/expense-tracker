@@ -11,10 +11,14 @@ function Expenses({ category, date, expense, currency, id }) {
   };
 
   return (
-    <div className="flex">
+    <div className="grid table-expenses fs-50">
       <div>{category}</div>
       <div>
-        <div>
+        <div
+          style={
+            expense >= 0 ? { color: "rgb(20, 189, 20)" } : { color: "red" }
+          }
+        >
           {expense >= 0 ? "+" : "-"}
           {currency}
           {expense < 0 ? expense.toString().slice(1) : expense}

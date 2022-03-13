@@ -7,10 +7,13 @@ function CashEdit({ open, setOpen }) {
   const dispatch = useDispatch();
 
   const onChange = (e) => {
-    if (/^0\d/.test(e.target.value.toString())) {
+    if (/^0\d/.test(e.target.value) || e.target.value.length >= 11) {
       return;
     }
-    setCash(e.target.value);
+
+    if (/^-?\d+$|^$|^-$/g.test(e.target.value)) {
+      setCash(e.target.value);
+    }
   };
 
   const onClose = () => {
@@ -29,7 +32,7 @@ function CashEdit({ open, setOpen }) {
     setCash("");
   };
 
-  // Close results when clicked outside
+  // Close when clicked outside
 
   useEffect(() => {
     if (open) {
@@ -53,18 +56,23 @@ function CashEdit({ open, setOpen }) {
   return (
     <>
       <div className="modal-background"></div>
-      <div id="balance" className="cash-edit-container">
-        <label>Change Balance</label>
+      <div id="balance" className="cash-edit-container flex">
+        <label className="fs-200">Change Balance</label>
         <input
-          type="number"
+          type="text"
           name="cash"
           placeholder="New Balance"
+          className="input-text fs-50 margin-bottom"
           value={cash}
           onChange={onChange}
         />
-        <div>
-          <button onClick={onClose}>Cancel</button>
-          <button onClick={onClick}>Change</button>
+        <div className="flex btn-container">
+          <div className="btn" onClick={onClose}>
+            Cancel
+          </div>
+          <div className="btn" onClick={onClick}>
+            Change
+          </div>
         </div>
       </div>
     </>

@@ -1,8 +1,9 @@
 import { Chart as ChartJS, ArcElement, Tooltip, Legend } from "chart.js";
-import { Pie } from "react-chartjs-2";
+import { Doughnut } from "react-chartjs-2";
 import { useSelector } from "react-redux";
 import ChartData from "./ChartData";
 import { useEffect, useState } from "react";
+
 ChartJS.register(ArcElement, Tooltip, Legend);
 
 function PieChart() {
@@ -26,7 +27,7 @@ function PieChart() {
     ],
   };
 
-  return <Pie className="section-margin" data={data} />;
+  return <Doughnut data={data} />;
 }
 
 export default PieChart;

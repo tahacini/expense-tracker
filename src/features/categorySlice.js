@@ -21,6 +21,16 @@ const initialState = [
     category: "Fuel",
     color: "rgba(75, 192, 192, 1)",
   },
+  {
+    id: 5,
+    category: "Entertainment",
+    color: "#FA1305",
+  },
+  {
+    id: 6,
+    category: "Repairments",
+    color: "#BA04DE",
+  },
 ];
 
 const categorySlice = createSlice({

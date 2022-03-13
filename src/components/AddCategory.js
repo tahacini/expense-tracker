@@ -43,19 +43,20 @@ function AddCategory({ onCloseTransaction }) {
 
   return (
     <div>
-      <form onSubmit={onSubmit}>
-        <div>
-          <label>Write your category</label>
+      <form>
+        <div className="margin-bottom">
+          <label className="fs-200">Write your category</label>
           <input
             type="text"
             name="category"
             value={category}
             onChange={(e) => setCategory(e.target.value)}
             placeholder="Add Category"
+            className="input-text"
           />
         </div>
-        <div>
-          <input type={"submit"} value={"Save Category"} />
+        <div className="btn" onClick={onSubmit}>
+          Save Category
         </div>
       </form>
     </div>

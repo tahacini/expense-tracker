@@ -3,12 +3,18 @@ import Expenses from "./Expenses";
 
 function Table() {
   const expenses = useSelector((state) => state.expenses);
-
-  // if (!expenses.length) return null;
+  const reversedArray = [...expenses].reverse();
 
   return (
-    <div>
-      {expenses.map((item) => (
+    <div
+      className="section-margin grid table"
+      style={
+        reversedArray.length > 5
+          ? { overflowY: "scroll" }
+          : { overflowY: "auto", marginRight: "14px" }
+      }
+    >
+      {reversedArray.map((item) => (
         <Expenses
           key={item.id}
           id={item.id}
