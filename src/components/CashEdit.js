@@ -1,9 +1,11 @@
 import { useDispatch } from "react-redux";
 import { cashEdited } from "../features/cashSlice";
 import { useState, useEffect } from "react";
+import ErrorMessage from "../ErrorMessage";
 
 function CashEdit({ open, setOpen }) {
   const [cash, setCash] = useState("");
+  const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
 
   const onChange = (e) => {
@@ -20,16 +22,17 @@ function CashEdit({ open, setOpen }) {
     window.removeEventListener("click", onClickOutSide);
     setOpen(false);
     setCash("");
+    setIsError(false);
   };
 
   const onClick = () => {
     if (!cash) {
+      setIsError(true);
       return;
     }
 
     onClose();
     dispatch(cashEdited(cash));
-    setCash("");
   };
 
   // Close when clicked outside
@@ -57,21 +60,24 @@ function CashEdit({ open, setOpen }) {
     <>
       <div className="modal-background"></div>
       <div id="balance" className="cash-edit-container flex">
-        <label className="fs-200">Change Balance</label>
-        <input
-          type="text"
-          name="cash"
-          placeholder="New Balance"
-          className="input-text fs-50 margin-bottom"
-          value={cash}
-          onChange={onChange}
-        />
-        <div className="flex btn-container">
-          <div className="btn" onClick={onClose}>
-            Cancel
-          </div>
-          <div className="btn" onClick={onClick}>
-            Change
+        <div>
+          <label className="fs-200">Change Balance</label>
+          {isError ? <ErrorMessage /> : <></>}
+          <input
+            type="text"
+            name="cash"
+            placeholder="New Balance"
+            className="input-text fs-50 margin-bottom"
+            value={cash}
+            onChange={onChange}
+          />
+          <div className="flex btn-container">
+            <div className="btn" onClick={onClose}>
+              Cancel
+            </div>
+            <div className="btn" onClick={onClick}>
+              Change
+            </div>
           </div>
         </div>
       </div>

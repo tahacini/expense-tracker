@@ -2,16 +2,18 @@ import { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryAdded } from "../features/categorySlice";
+import ErrorMessage from "../ErrorMessage";
 
 function AddCategory({ onCloseTransaction }) {
   const [category, setCategory] = useState("");
   const categ = useSelector((state) => state.categories);
+  const [isError, setIsError] = useState(false);
   const dispatch = useDispatch();
 
   const onSubmit = (e) => {
     e.preventDefault();
     if (!category) {
-      alert("Please Add category");
+      setIsError(true);
       return;
     }
 
@@ -39,6 +41,7 @@ function AddCategory({ onCloseTransaction }) {
 
     setCategory("");
     onCloseTransaction();
+    setIsError(false);
   };
 
   return (
@@ -46,6 +49,7 @@ function AddCategory({ onCloseTransaction }) {
       <form>
         <div className="margin-bottom">
           <label className="fs-200">Write your category</label>
+          {isError ? <ErrorMessage /> : <></>}
           <input
             type="text"
             name="category"

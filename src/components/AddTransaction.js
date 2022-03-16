@@ -3,12 +3,14 @@ import { useSelector, useDispatch } from "react-redux";
 import { expenseAdded } from "../features/expenseSlice";
 import { cashAdded } from "../features/cashSlice";
 import { nanoid } from "@reduxjs/toolkit";
+import ErrorMessage from "../ErrorMessage";
 
 function AddTransaction({ onCloseTransaction }) {
   const categories = useSelector((state) => state.categories);
   const [expense, setExpense] = useState("");
   const [isExpense, setIsExpense] = useState(true);
   const [category, setCategory] = useState("");
+  const [isError, setIsError] = useState(false);
   const today = new Date().toJSON().slice(0, 10);
   const dispatch = useDispatch();
 
@@ -22,7 +24,7 @@ function AddTransaction({ onCloseTransaction }) {
   const onSubmit = (e) => {
     e.preventDefault();
     if (!expense) {
-      alert("Please Add Transaction");
+      setIsError(true);
       return;
     }
 
@@ -43,6 +45,7 @@ function AddTransaction({ onCloseTransaction }) {
     setExpense("");
     setIsExpense(true);
     onCloseTransaction();
+    setIsError(false);
   };
 
   const onChange = (e) => {
@@ -75,6 +78,7 @@ function AddTransaction({ onCloseTransaction }) {
         </div>
         <div className="margin-bottom">
           <label className="fs-200">Write your Transaction</label>
+          {isError ? <ErrorMessage /> : <></>}
           <input
             type="text"
             value={expense}

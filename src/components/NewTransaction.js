@@ -37,7 +37,12 @@ function NewTransaction({ open, setOpen }) {
       if (document.getElementById("transaction").contains(e.target)) {
         return;
       }
-
+      const question = document.getElementById("question-container");
+      if (question) {
+        if (document.getElementById("question-container").contains(e.target)) {
+          return;
+        }
+      }
       onCloseTransaction();
     }
   }, [open]); // eslint-disable-line react-hooks/exhaustive-deps

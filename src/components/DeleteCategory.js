@@ -3,6 +3,7 @@ import { categoryDeleted } from "../features/categorySlice";
 import { useSelector } from "react-redux";
 import { categoryExpenseDeleted } from "../features/expenseSlice";
 import { cashAdded } from "../features/cashSlice";
+import Category from "./Category";
 
 function DeleteCategory() {
   const categories = useSelector((state) => state.categories);
@@ -26,13 +27,7 @@ function DeleteCategory() {
   return (
     <div className="category-container grid">
       {categories.map((el) => (
-        <div key={el.id}>
-          {el.category}{" "}
-          <i
-            onClick={() => onDelete(el.category)}
-            className="fa-solid fa-trash-can"
-          ></i>
-        </div>
+        <Category key={el.id} category={el.category} onDelete={onDelete} />
       ))}
     </div>
   );

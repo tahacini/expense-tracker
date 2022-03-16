@@ -1,24 +1,19 @@
-import { useSelector, useDispatch } from "react-redux";
-import { categoryDeleted } from "../features/categorySlice";
-import { categoryExpenseDeleted } from "../features/expenseSlice";
+import Question from "./Question";
+import { useState } from "react";
 
-function Category() {
-  const categories = useSelector((state) => state.categories);
-  const dispatch = useDispatch();
-
-  const handleDelete = (category) => {
-    dispatch(categoryExpenseDeleted(category));
-    dispatch(categoryDeleted(category));
-  };
+function Category({ category, onDelete }) {
+  const [open, setOpen] = useState(false);
 
   return (
     <div>
-      {categories.map((item) => (
-        <div key={item.id}>
-          {item.category}
-          <button onClick={() => handleDelete(item.category)}>X</button>
-        </div>
-      ))}
+      {category}{" "}
+      <i onClick={() => setOpen(true)} className="fa-solid fa-trash-can"></i>
+      <Question
+        open={open}
+        setOpen={setOpen}
+        onDelete={() => onDelete(category)}
+        message={`Are you sure you want to delete category ${category}? It will also delete all transaction in it.`}
+      />
     </div>
   );
 }
