@@ -11,6 +11,7 @@ function AddCategory({ onCloseTransaction }) {
   const dispatch = useDispatch();
 
   const onSubmit = (e) => {
+    onCloseTransaction();
     e.preventDefault();
     if (!category) {
       setIsError(true);
@@ -40,7 +41,6 @@ function AddCategory({ onCloseTransaction }) {
     );
 
     setCategory("");
-    onCloseTransaction();
     setIsError(false);
   };
 

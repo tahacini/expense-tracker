@@ -2,6 +2,11 @@ import { useEffect } from "react";
 import ReactDom from "react-dom";
 
 function Question({ open, setOpen, onDelete, message }) {
+  const deleteItem = () => {
+    window.removeEventListener("click", onClickOutSide);
+    onDelete();
+  };
+
   const onClose = () => {
     window.removeEventListener("click", onClickOutSide);
     setOpen(false);
@@ -32,7 +37,7 @@ function Question({ open, setOpen, onDelete, message }) {
       <div id="question" className="question-container">
         <div className="fs-400">{message}</div>
         <div className="flex fs-200 questiion-yesno">
-          <div onClick={onDelete} className="yes btn-yesno">
+          <div onClick={deleteItem} className="yes btn-yesno">
             Yes <i className="fa-solid fa-check"></i>
           </div>
           <div onClick={onClose} className="no btn-yesno">

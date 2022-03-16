@@ -14,6 +14,7 @@ function NewTransaction({ open, setOpen }) {
   };
 
   const onCloseTransaction = () => {
+    window.removeEventListener("click", onClickOutSide);
     setActive("Transaction");
     setOpen(false);
   };
@@ -32,20 +33,20 @@ function NewTransaction({ open, setOpen }) {
     return () => {
       window.removeEventListener("click", onClickOutSide);
     };
+  }, [open, active]); // eslint-disable-line react-hooks/exhaustive-deps
 
-    function onClickOutSide(e) {
-      if (document.getElementById("transaction").contains(e.target)) {
+  function onClickOutSide(e) {
+    if (document.getElementById("transaction").contains(e.target)) {
+      return;
+    }
+    const question = document.getElementById("question-container");
+    if (question) {
+      if (document.getElementById("question-container").contains(e.target)) {
         return;
       }
-      const question = document.getElementById("question-container");
-      if (question) {
-        if (document.getElementById("question-container").contains(e.target)) {
-          return;
-        }
-      }
-      onCloseTransaction();
     }
-  }, [open]); // eslint-disable-line react-hooks/exhaustive-deps
+    onCloseTransaction();
+  }
 
   // Render Active Switch
 
