@@ -37,10 +37,10 @@ function Question({ open, setOpen, onDelete, message }) {
       <div id="question" className="question-container">
         <div className="fs-400">{message}</div>
         <div className="flex fs-200 questiion-yesno">
-          <div onClick={deleteItem} className="yes btn-yesno">
+          <div onMouseUp={deleteItem} className="yes btn-yesno">
             Yes <i className="fa-solid fa-check"></i>
           </div>
-          <div onClick={onClose} className="no btn-yesno">
+          <div onMouseUp={onClose} className="no btn-yesno">
             No <i className="fa-solid fa-xmark"></i>
           </div>
         </div>

@@ -36,15 +36,13 @@ function NewTransaction({ open, setOpen }) {
   }, [open, active]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function onClickOutSide(e) {
-    if (document.getElementById("transaction").contains(e.target)) {
+    if (
+      document.getElementById("transaction").contains(e.target) ||
+      document.getElementById("portal").contains(e.target)
+    ) {
       return;
     }
-    const question = document.getElementById("question-container");
-    if (question) {
-      if (document.getElementById("question-container").contains(e.target)) {
-        return;
-      }
-    }
+
     onCloseTransaction();
   }
 
