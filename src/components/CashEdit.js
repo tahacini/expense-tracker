@@ -1,7 +1,7 @@
 import { useDispatch } from "react-redux";
 import { cashEdited } from "../features/cashSlice";
 import { useState, useEffect } from "react";
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 
 function CashEdit({ open, setOpen }) {
   const [cash, setCash] = useState("");

@@ -2,7 +2,7 @@ import { useState } from "react";
 import { nanoid } from "@reduxjs/toolkit";
 import { useDispatch, useSelector } from "react-redux";
 import { categoryAdded } from "../features/categorySlice";
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 
 function AddCategory({ onCloseTransaction }) {
   const [category, setCategory] = useState("");

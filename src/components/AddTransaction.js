@@ -3,7 +3,7 @@ import { useSelector, useDispatch } from "react-redux";
 import { expenseAdded } from "../features/expenseSlice";
 import { cashAdded } from "../features/cashSlice";
 import { nanoid } from "@reduxjs/toolkit";
-import ErrorMessage from "../ErrorMessage";
+import ErrorMessage from "./ErrorMessage";
 
 function AddTransaction({ onCloseTransaction }) {
   const categories = useSelector((state) => state.categories);
